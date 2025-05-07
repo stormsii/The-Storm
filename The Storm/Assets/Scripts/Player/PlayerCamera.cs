@@ -1,12 +1,17 @@
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 using Unity.Netcode;
 using TMPro;
+using System.Globalization;
 
-public class PlayerCamera : MonoBehaviour
+public class PlayerCamera : NetworkBehaviour
 {
-    [Header("Cursor")]
-    public RectTransform cursorRect;
+    [Header("UI Raycasting")]
+    [SerializeField] private GraphicRaycaster uiRaycaster;
+    [SerializeField] private EventSystem eventSystem;
 
     [Header("Component References")]
     private GameObject player;
@@ -22,8 +27,10 @@ public class PlayerCamera : MonoBehaviour
     private Vector3 offset;
     private Quaternion rotation;
 
-    private Vector3 lastCursorPos;
-    private bool invisibleCursor = false;
+    private float yaw = 0f;
+    private float pitch = 20f;
+    [SerializeField] private float minPitch = -20f;
+    [SerializeField] private float maxPitch = 80f;
 
     void OnEnable()
     {
@@ -37,17 +44,14 @@ public class PlayerCamera : MonoBehaviour
 
     void Awake()
     {
-        //Disable/Hide Cursor
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.None;
-
-        player = transform.parent.gameObject;
-
         controls = new Controls();
         look = controls.Player.Look;
         leftClick = controls.Player.LeftClick;
         rightClick = controls.Player.RightClick;
+
+        player = transform.parent.gameObject;
     }
+
 
     void Start()
     {
@@ -59,47 +63,65 @@ public class PlayerCamera : MonoBehaviour
 
     void Update()
     {
-        Vector2 mousePos = Input.mousePosition;
-        cursorRect.position = mousePos;
+
     }
 
     void LateUpdate()
     {
+        if (!IsOwner) return;
 
-        /*
-        if (!IsOwner) { Debug.Log("Not Owner!"); return; }
-        
-
-        if (leftClick.IsPressed() && !invisibleCursor)
+        // Rotate camera and player based on mouse movement when holding right-click (WoW-style)
+        if (rightClick.IsPressed() && !IsPointerOverUI())
         {
-            InvisibleCursor();
-            Debug.Log("Left Pressed");
+            // Capture the mouse movement delta
+            Vector2 mouseDelta = look.ReadValue<Vector2>();
+
+            // Update yaw based on mouse X movement
+            yaw += mouseDelta.x * rotationSpeed * Time.deltaTime;
+
+            // Update pitch based on mouse Y movement (clamped to min/max)
+            pitch -= mouseDelta.y * rotationSpeed * Time.deltaTime;
+            pitch = Mathf.Clamp(pitch, minPitch, maxPitch);
+
+            // Rotate the player around the Y-axis (horizontal) with the camera's yaw
+            player.transform.rotation = Quaternion.Euler(0f, yaw, 0f);
         }
-        else
+
+        // When left-click is held, just rotate the camera around the player (no player rotation)
+        else if (leftClick.IsPressed() && !IsPointerOverUI())
         {
-            if (invisibleCursor)
-            {
-                VisibleCursor();
-            }
+            Vector2 mouseDelta = look.ReadValue<Vector2>();
+
+            // Update yaw for smooth horizontal camera rotation
+            yaw += mouseDelta.x * rotationSpeed * Time.deltaTime;
+
+            // Update pitch for smooth vertical camera movement
+            pitch -= mouseDelta.y * rotationSpeed * Time.deltaTime;
+            pitch = Mathf.Clamp(pitch, minPitch, maxPitch);
         }
+
+        // Calculate camera’s final rotation (based on yaw and pitch)
+        Quaternion targetRotation = Quaternion.Euler(pitch, yaw, 0f);
+
+        // Orbit the camera around the player
+        Vector3 rotatedOffset = targetRotation * offset;
+        transform.position = player.transform.position + rotatedOffset;
+
+        // Always make the camera look at the player
+        transform.LookAt(player.transform.position + Vector3.up * 1.5f); // Adjust height if needed
+    }
+
+
+    private bool IsPointerOverUI()
+    {
+        PointerEventData pointerData = new PointerEventData(eventSystem)
+        {
+            position = Input.mousePosition
+        };
+        List<RaycastResult> results = new List<RaycastResult>();
+        uiRaycaster.Raycast(pointerData, results);
         
+        return results.Count > 0;
     }
 
-    void InvisibleCursor()
-    {
-        invisibleCursor = true;
-        Vector3 mousePosition = Input.mousePosition;  // Store screen space position directly
-        lastCursorPos = mousePosition;  // You can use this for tracking the cursor's position in screen space
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;  // Lock the cursor to the center of the screen
-    }
-
-    void VisibleCursor()
-    {
-        Cursor.lockState = CursorLockMode.None;  // Unlock the cursor and allow it to move freely
-        Cursor.visible = true;
-        invisibleCursor = false;
-    }
-        */
-    }
 }
