@@ -30,7 +30,7 @@ public class DebugUI : MonoBehaviour
             $"\nisJumping: {_mc.IsJumping}" +
             $"\nMovementSpeed: {_mc.MovementSpeed}" +
             $"\n\n<b>Player Stats</b>" +
-            $"\nHealth: {_ps.CurrentHealth}/{_ps.MaximumHealth}" +
+            $"\nHealth: {_ps.currentHealth.Value}/{_ps.maxHealth.Value}" +
             $"\nPower: {_ps.CurrentPower}/{_ps.MaxPower}" +
             $"\nSecondaryPower: {_ps.CurrentSecondaryPower}/{_ps.MaxSecondaryPower}";
     }

@@ -63,27 +63,42 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Player\PlayerStartup.cs" />
+    <Compile Include="Assets\Scripts\UI\Billboard.cs" />
+    <Compile Include="Assets\Scripts\Player\Damageable.cs" />
     <Compile Include="Assets\FastScriptReload\Samples\Basic\Scripts\Graph.cs" />
     <Compile Include="Assets\FastScriptReload\Samples\Basic\Scripts\FunctionLibrary.cs" />
+    <Compile Include="Assets\Scripts\Player\Casting.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerCamera.cs" />
+    <Compile Include="Assets\Scripts\Player\HealthbarScript.cs" />
+    <Compile Include="Assets\Spells\Parent Scripts\AllSpells.cs" />
+    <Compile Include="Assets\Scripts\UI\CastbarScript.cs" />
     <Compile Include="Assets\Scripts\Player\MovementController.cs" />
     <Compile Include="Assets\Scripts\SceneManagerScript.cs" />
+    <Compile Include="Assets\Spells\Parent Scripts\Spell.cs" />
+    <Compile Include="Assets\Scripts\Player\Interfaces.cs" />
     <Compile Include="Assets\Server\AutoConnectClient.cs" />
     <Compile Include="Assets\Server\AutoConnect.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
+    <Compile Include="Assets\Scripts\UnityEdits.cs" />
+    <Compile Include="Assets\Spells\Parent Scripts\Projectile.cs" />
+    <Compile Include="Assets\Scripts\Player\Targeting.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerControls.cs" />
     <Compile Include="Assets\Scripts\Player\Controls.cs" />
     <Compile Include="Assets\Scripts\Player\ServerUpdates.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerStats.cs" />
     <Compile Include="Assets\Scripts\PlayerSpawner.cs" />
+    <Compile Include="Assets\Spells\VFX\AOE\Scripts\CameraRotation.cs" />
     <Compile Include="Assets\Server\AutoConnectServer.cs" />
+    <Compile Include="Assets\Scripts\Player\Outputter.cs" />
     <Compile Include="Assets\Scripts\UI\DebugUI.cs" />
+    <Compile Include="Assets\Scripts\Player\Spellbook.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\FastScriptReload\Plugins\Roslyn\2019+\RoslynLicense.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile-2-Pass.shader" />
+    <None Include="Assets\Spells\VFX\AOE\Documentation\Readme IMPORTANT.txt" />
     <None Include="Assets\FastScriptReload\Plugins\Roslyn\2021+\System.Collections.Immutable.FSR.dll" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
     <None Include="Assets\FastScriptReload\Plugins\Harmony\HarmonyLicense.txt" />
@@ -1242,6 +1257,10 @@
       <HintPath>Library\ScriptAssemblies\Unity.Multiplayer.Tools.NetworkSimulator.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Unity.Postprocessing.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Postprocessing.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Unity.TextMeshPro">
       <HintPath>Library\ScriptAssemblies\Unity.TextMeshPro.dll</HintPath>
       <Private>False</Private>
@@ -1508,6 +1527,10 @@
     </Reference>
     <Reference Include="Unity.Services.Multiplayer.Editor.Matchmaker.Authoring">
       <HintPath>Library\ScriptAssemblies\Unity.Services.Multiplayer.Editor.Matchmaker.Authoring.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Postprocessing.Runtime">
+      <HintPath>Library\ScriptAssemblies\Unity.Postprocessing.Runtime.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Multiplayer.Tools.NetStatsReporting">

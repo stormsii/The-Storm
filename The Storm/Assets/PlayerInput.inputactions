@@ -33,19 +33,10 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Interact",
-                    "type": "Button",
-                    "id": "852140f2-7766-474d-8707-702459ba45f3",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "Hold",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Crouch",
                     "type": "Button",
                     "id": "27c5f898-bc57-4ee1-8800-db469aca5fe3",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -99,6 +90,24 @@
                     "name": "RightClick",
                     "type": "Button",
                     "id": "d228ffc9-79e6-4857-867f-e0dfbab5a6ca",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "TestDamage",
+                    "type": "Button",
+                    "id": "d3aa06a6-b617-43b5-abb9-0abd05028b52",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Escape",
+                    "type": "Button",
+                    "id": "92683ec6-6d85-4d30-9157-1a668d1e649b",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -449,28 +458,6 @@
                 },
                 {
                     "name": "",
-                    "id": "1c04ea5f-b012-41d1-a6f7-02e963b52893",
-                    "path": "<Keyboard>/e",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "Interact",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "b3f66d0b-7751-423f-908b-a11c5bd95930",
-                    "path": "<Gamepad>/buttonNorth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Interact",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "4f4649ac-64a8-4a73-af11-b3faef356a4d",
                     "path": "<Gamepad>/buttonEast",
                     "interactions": "",
@@ -510,6 +497,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "RightClick",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "993ad7e5-a643-4234-83af-6fd6f76afc0d",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TestDamage",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cbe0fd6c-cbd0-419a-843e-4a691c471653",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Escape",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
